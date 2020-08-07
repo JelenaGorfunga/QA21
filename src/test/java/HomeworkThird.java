@@ -32,7 +32,7 @@ public class HomeworkThird {
     }
 
     @Test
-    public void checkTitle() {
+    public void checkThirdArticle() {
         List<WebElement> articles = driver.findElements(ARTICLE);
 
         WebElement article = articles.get(2);
