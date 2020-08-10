@@ -1,7 +1,9 @@
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.json.JsonOutput;
+
 import java.awt.geom.Point2D;
 
-public class WorkWithDistance {
+public class WorkWithMap {
 
     @Test
     public void distanceBetweenTwoPoints() {
