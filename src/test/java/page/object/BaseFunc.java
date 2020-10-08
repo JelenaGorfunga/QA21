@@ -46,7 +46,7 @@ public class BaseFunc {
 
     public void click(WebElement element) {
         LOGGER.info("Clicking on Web Element");
-
+        //wait.until(ExpectedConditions.elementToBeClickable(element));
         wait.until(elementToBeClickable(element));
         element.click();
     }
@@ -54,6 +54,7 @@ public class BaseFunc {
     public void click(By locator) {
         LOGGER.info("Clicking by locator");
 
+        //wait.until(ExpectedConditions.elementToBeClickable(locator));
         wait.until(elementToBeClickable(locator));
         findElement(locator).click();
     }
@@ -80,6 +81,13 @@ public class BaseFunc {
         } catch (NoSuchElementException e) {
             return false;
         }
+    }
+
+    public void closePopUp(By locator) {
+        LOGGER.info("Closing pop-up window");
+
+        wait.until(visibilityOfElementLocated(locator));
+        driver.findElement(locator).click();
     }
 
     public void closeBrowser() {

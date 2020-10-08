@@ -9,7 +9,7 @@ import page.object.BaseFunc;
 
 public class HomeWorkObjectTests {
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
-    private final By POPUP = By.id("cookiebanner");
+    private final By POPUP_SUBMIT_BUTTON = By.id("CybotCookiebotDialogBodyButtonAccept");
 
     @Test
     public void homePageObjectTests() {
@@ -19,10 +19,11 @@ public class HomeWorkObjectTests {
         baseFunc.openPage("1a.lv");
 
         HomePageShop homePageShop = new HomePageShop(baseFunc);
-        homePageShop.closePopUp(POPUP);
-        SubmenuPage submenuPage = homePageShop.openSubmenu(1);
-        LaptopPage laptopPage = submenuPage.openLaptop(0);
-        CatalogPage catalogPage = laptopPage.openCatalogById(0);
+        baseFunc.click(POPUP_SUBMIT_BUTTON);
+        SubmenuPage submenuPage = homePageShop.openSubmenu(0);
+
+        //LaptopPage laptopPage = submenuPage.openLaptop(0);
+        //CatalogPage catalogPage = laptopPage.openCatalogById(0);
         //BasketPage basketPage = catalogPage.openBuyPageById(0);
 
 
