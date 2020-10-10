@@ -20,11 +20,9 @@ public class HomeWorkObjectTests {
 
         HomePageShop homePageShop = new HomePageShop(baseFunc);
         baseFunc.click(POPUP_SUBMIT_BUTTON);
-        SubmenuPage submenuPage = homePageShop.openSubmenu(0);
 
-        //LaptopPage laptopPage = submenuPage.openLaptop(0);
-        //CatalogPage catalogPage = laptopPage.openCatalogById(0);
-        //BasketPage basketPage = catalogPage.openBuyPageById(0);
+        LaptopPage laptopPage = homePageShop.selectSubCategory("Datortehnika, preces birojam", "Portatīvie datori");
+        laptopPage.clickOnItem();
 
 
 

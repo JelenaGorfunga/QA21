@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -18,6 +18,8 @@ public class BaseFunc {
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
     private ChromeOptions options;
     private Alert alert;
+    public Actions actions;
+    public JavascriptExecutor js;
 
     public BaseFunc() {
         options = new ChromeOptions();
@@ -26,6 +28,8 @@ public class BaseFunc {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 10);
+        actions = new Actions(driver);
+        js = (JavascriptExecutor) driver;
     }
 
     public void openPage(String url) {
@@ -46,7 +50,7 @@ public class BaseFunc {
 
     public void click(WebElement element) {
         LOGGER.info("Clicking on Web Element");
-        //wait.until(ExpectedConditions.elementToBeClickable(element));
+
         wait.until(elementToBeClickable(element));
         element.click();
     }
@@ -54,7 +58,6 @@ public class BaseFunc {
     public void click(By locator) {
         LOGGER.info("Clicking by locator");
 
-        //wait.until(ExpectedConditions.elementToBeClickable(locator));
         wait.until(elementToBeClickable(locator));
         findElement(locator).click();
     }

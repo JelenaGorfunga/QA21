@@ -4,38 +4,42 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import page.object.BaseFunc;
 
-import java.util.List;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class HomePageShop {
-    private final By SUBMENU = By.xpath(".//a[contains(@class, 'submenu-lvl1')]");
+    private final By MENU = By.xpath(".//div[contains(@class, 'submenu-lvl1--index')]");
+    private final By SUBMENU = By.xpath(".//a[@class = 'submenu-lvl2__list-item-link']");
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
     private BaseFunc baseFunc;
-    private WebDriverWait wait;
 
     public HomePageShop(BaseFunc baseFunc) {
+
         this.baseFunc = baseFunc;
     }
 
+    public LaptopPage selectSubCategory(String category, String subcategory) {
 
-    public WebElement getSubmenuById(int id) {
-        LOGGER.info("Finding submenu by ID");
+        WebElement menuItem = null;
+        for (WebElement we: baseFunc.findElement(MENU).findElements(By.tagName("li"))
+        ) {
+            if (we.getText().equals(category)) {
+                menuItem = we;
+                break;
+            }
+        }
 
-        List<WebElement> allSubmenu = baseFunc.findElements(SUBMENU);
-        return allSubmenu.get(id);
-    }
+        baseFunc.actions.moveToElement(menuItem).build().perform();
 
-    public SubmenuPage openSubmenu(int id) {
-        LOGGER.info("Opening submenu by id and clicking on it");
+        for (WebElement we : menuItem.findElements(SUBMENU)
+        ) { if (we.getText().equals(subcategory)) {
+            we.click();
+            break;
+        }
 
-        baseFunc.click(getSubmenuById(id));
-        return new SubmenuPage(baseFunc);
+        }
+        return new LaptopPage(baseFunc);
     }
 
 }
